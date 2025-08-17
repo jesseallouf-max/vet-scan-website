@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Dark Style Test</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+        .test-container { margin-bottom: 20px; }
+        .map-container { height: 400px; width: 100%; border: 1px solid #ccc; margin-bottom: 10px; }
+        h3 { margin: 10px 0 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Google Maps Style Test</h1>
+    
+    <div class="test-container">
+        <h3>Test 1: Your Map ID (should be dark after you configure it)</h3>
+        <div id="map1" class="map-container"></div>
+        <p>Map ID: f0a9fe7733803250ab418506 | Style ID: d588516256fde8833059e643</p>
+    </div>
+    
+    <div class="test-container">
+        <h3>Test 2: Default Map (for comparison)</h3>
+        <div id="map2" class="map-container"></div>
+        <p>Standard Google Map with no custom styling</p>
+    </div>
+
+    <script>
+        const center = { lat: 40.758, lng: -73.985 };
+        const zoom = 12;
+
+        function initMaps() {
+            // Test 1: Your configured Map ID
+            const map1 = new google.maps.Map(document.getElementById("map1"), {
+                center: center,
+                zoom: zoom,
+                mapId: "f0a9fe7733803250ab418506"
+            });
+
+            // Test 2: Default map
+            const map2 = new google.maps.Map(document.getElementById("map2"), {
+                center: center,
+                zoom: zoom
+            });
+        }
+
+        // Load Google Maps API
+        function loadGoogleMapsAPI() {
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCDyCyrPP5lQcWc7hDd16vIjGDU4cNdgUc&map_ids=f0a9fe7733803250ab418506&callback=initMaps';
+            script.async = true;
+            script.defer = true;
+            script.onerror = function() {
+                document.body.innerHTML = '<h1>Error loading Google Maps API</h1><p>Check your API key and internet connection.</p>';
+            };
+            document.head.appendChild(script);
+        }
+
+        window.onload = loadGoogleMapsAPI;
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+html,body{background:#ffffff;color:#0b1220}
+.section{max-width:1120px;margin:0 auto;padding:3rem 1.25rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:600;border-radius:0.2rem;padding:.40rem 1rem}
+.btn-primary{background:#146C60;color:#fff}
+.btn-primary:hover{opacity:.9}
+.btn-ghost{background:#fff;border:1px solid #e5e7eb}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.tag{display:inline-block;font-size:.75rem;padding:.35rem .6rem;border-radius:.5rem;background:#fff;border:1px solid #e5e7eb}
+/* ---- One-page smooth scroll + header offset ---- */
+:root { --headerH: 80px; }              /* Fallback; real value set from Header.tsx */
+html { scroll-behavior: smooth; }
+.scroll-offset { scroll-margin-top: var(--headerH); }
+
+/* Additional scroll offset for section headings */
+#services, #about, #coverage, #contact, #faq, #testimonials {
+  scroll-margin-top: calc(var(--headerH) + 2rem);
+}
+
+/* ---- Desktop nav link (green accent + graceful underline) ---- */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  font-weight: 700;                      /* visually heavier like mobile */
+  letter-spacing: .04em;
+  color: #0E1215;
+  transition: color .2s ease;
+}
+.nav-link:hover { color: #146C60; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* ---- Buttons ---- */
+.btn { font-weight: 700; }               /* BOOK NOW truly bold */
+
+/* ---- Focus (accessible, no ugly halos) ---- */
+:focus { outline: none; }
+:focus-visible { outline: 2px solid #146C60; outline-offset: 2px; }
+
+/* Hero CTA — FIXED VERSION - removed conflicting styles */
+.btn-hero {
+  @apply inline-flex items-center justify-center w-full sm:w-auto 
+         h-14 md:h-16 px-8 md:px-10 rounded-xl font-bold text-lg tracking-wide
+         text-white bg-teal-700 hover:bg-teal-800 active:bg-teal-900
+         transition-all duration-200
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-700
+         shadow-lg hover:shadow-xl;
+}
+.btn-hero:hover {
+  transform: scale(1.05);
+}
+.btn-hero:active {
+  transform: scale(0.95);
+}
+
+/* Single Responsive Hero Button */
+.btn-hero-responsive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #146C60;
+  color: #fff;
+  border-radius: 0.2rem;
+  border: none;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  
+  /* Mobile: full width, smaller padding */
+  width: 100%;
+  padding: 1.25rem 3rem;
+  font-size: 1.125rem;
+}
+
+.btn-hero-responsive:hover {
+  opacity: 0.9;
+}
+
+/* Desktop: auto width, bigger padding */
+@media (min-width: 768px) {
+  .btn-hero-responsive {
+    width: auto;
+    padding: 1.25rem 8rem;
+    font-size: 1.5rem;
+  }
+}
+
+:root {
+  --brand-cream: rgba(244,238,226, 0.8); /* replace with your header cream */
+}
+
+/* Tape-style highlight for headlines */
+.tape{
+  background-color: var(--brand-cream);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  box-shadow: 0 -.2em 0 .15em var(--brand-cream), 0.1em .2em 0 .15em var(--brand-cream);
+  padding: 0 .2em;
+}
+
+/* Footer heading fix - add this to globals.css temporarily */
+footer h3, footer h4 {
+  font-weight: 800; /* Bump from 700 to 800 for Chrome */
+  -webkit-font-smoothing: antialiased;
+}

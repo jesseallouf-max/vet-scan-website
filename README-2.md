@@ -15,7 +15,7 @@ npm run dev
 
 ## Deploy (Vercel)
 
-- Create a new Vercel project, link this repo, and set env vars.
+- Create a  new Vercel project, link this repo, and set env vars.
 - Push to `main` to deploy.
 
 ## Environment Variables

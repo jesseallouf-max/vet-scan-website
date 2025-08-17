@@ -367,7 +367,7 @@ export default function Coverage() {
 }
 
 // Google Maps loader (UNCHANGED)
-async function importGoogle(apiKey) {
+async function importGoogle(apiKey: string) {
   if (typeof window === "undefined") return null;
   if (window.google?.maps) return window.google;
 

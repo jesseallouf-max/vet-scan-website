@@ -19,10 +19,11 @@ function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:(
           isOpen ? 'text-teal-700' : 'text-gray-900 md:hover:text-teal-700'
         }`}
       >
-        <span>{q}</span>
+        <span className="pr-4">{q}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
+          className="flex-shrink-0"
         >
           <div className="text-teal-600 group-hover:text-teal-700">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">

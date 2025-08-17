@@ -1,7 +1,16 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:()=>void}){
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState(0)
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(isOpen ? contentRef.current.scrollHeight : 0)
+    }
+  }, [isOpen])
+
   return (
     <div className="border-b border-gray-200 last:border-b-0">
       <button
@@ -11,27 +20,32 @@ function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:(
         }`}
       >
         <span>{q}</span>
- <motion.div
-  animate={{ rotate: isOpen ? 180 : 0 }}
-  transition={{ duration: 0.2 }}
->
-  <div className="text-teal-600 group-hover:text-teal-700">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  </div>
-</motion.div>
-</button>
-<motion.div
-  initial={false}
-  animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-  transition={{ duration: 0.2 }}
->
-  <div className="overflow-hidden">
-    <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
-  </div>
-</motion.div>
-      </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="text-teal-600 group-hover:text-teal-700">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </motion.div>
+      </button>
+      
+      <motion.div
+        initial={false}
+        animate={{ 
+          height: height,
+          opacity: isOpen ? 1 : 0 
+        }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
+        style={{ overflow: "hidden" }}
+      >
+        <div ref={contentRef}>
+          <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
+        </div>
+      </motion.div>
+    </div>
   )
 }
 

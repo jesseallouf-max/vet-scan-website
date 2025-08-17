@@ -23,9 +23,8 @@ function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:(
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
-          className="flex-shrink-0"
         >
-          <div className="text-teal-600 group-hover:text-teal-700">
+          <div className="text-teal-600 group-hover:text-teal-700 flex-shrink-0">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

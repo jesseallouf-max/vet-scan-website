@@ -391,7 +391,7 @@ async function importGoogle(apiKey: string) {
   await new Promise((resolve, reject) => {
     const started = Date.now();
     const check = () => {
-      if (window.google?.maps) return resolve();
+      if (window.google?.maps) return resolve(undefined);
       if (Date.now() - started > 10000) return reject(new Error("Timeout"));
       requestAnimationFrame(check);
     };

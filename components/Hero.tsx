@@ -11,8 +11,9 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.22, delay: 0.05 }}
-          className="relative hidden md:block order-1"
-        >
+          >
+        <div  className="relative hidden md:block order-1">
+        
           <div className="relative w-full h-[420px] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 bg-white">
             <Image
               src="/images/headshot.jpg"
@@ -22,6 +23,7 @@ export default function Hero() {
               sizes="(min-width: 768px) 520px, 100vw"
               className="object-cover object-center"
             />
+            </div>
           </div>
         </motion.div>
 

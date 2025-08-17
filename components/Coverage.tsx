@@ -22,7 +22,7 @@ const neighborhoods = [
 ];
 
 // Static Maps URL for preview
-function staticMapUrl(key) {
+function staticMapUrl(key: string) {
   const base = "https://maps.googleapis.com/maps/api/staticmap";
   const size = "size=1200x700&scale=2";
   const center = `center=${CENTER.lat},${CENTER.lng}&zoom=${ZOOM}`;

@@ -8,24 +8,22 @@ export default function ContactForm(){
   const [selectedService, setSelectedService] = useState('Abdominal Ultrasound')
   const [allowTexting, setAllowTexting] = useState(false)
   const [isEmergency, setIsEmergency] = useState(false)
+  const [hasInteracted, setHasInteracted] = useState(false)
 
   const services = [
     'Abdominal Ultrasound',
     'Second Opinions / Teleconsult'
   ]
 
-  // Scroll to contact section when switching between 'ok' and 'idle' states
+  // Only scroll to contact section after user interactions, not on initial load
   useEffect(() => {
-    if (status === 'ok' || status === 'idle') {
-      // Only scroll if we're not on initial page load
-      if (document.readyState === 'complete') {
-        const contactSection = document.getElementById('contact')
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
+    if (hasInteracted && (status === 'ok' || status === 'idle')) {
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
-  }, [status])
+  }, [status, hasInteracted])
 
   // Auto-resize textarea
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -48,7 +46,7 @@ export default function ContactForm(){
   }
 
   async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
-    e.preventDefault(); setStatus('loading'); setMessage('')
+    e.preventDefault(); setStatus('loading'); setMessage(''); setHasInteracted(true)
     const form=e.currentTarget; const data=Object.fromEntries(new FormData(form) as any)
     data.service = selectedService
     data.allowTexting = allowTexting
@@ -119,7 +117,7 @@ export default function ContactForm(){
 
             <div className="flex justify-center">
               <button
-                onClick={() => setStatus('idle')}
+                onClick={() => {setStatus('idle'); setHasInteracted(true)}}
                 className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
               >
                 Submit Another Request

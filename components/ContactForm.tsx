@@ -222,6 +222,7 @@ export default function ContactForm(){
                       {service}
                     </button>
                   ))}
+                   </div>
                 </motion.div>
               )}
             </div>

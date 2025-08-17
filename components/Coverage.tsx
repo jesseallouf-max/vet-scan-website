@@ -232,7 +232,7 @@ export default function Coverage() {
   }, [desktopInView, apiKey]);
 
   const hasKey = Boolean(apiKey);
-  const staticUrl = hasKey ? staticMapUrl(apiKey) : null;
+  const staticUrl = hasKey && apiKey ? staticMapUrl(apiKey) : null;
 
   const handleOutsideZoneClick = () => {
     const contactSection = document.getElementById('contact');

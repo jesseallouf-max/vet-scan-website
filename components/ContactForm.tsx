@@ -9,17 +9,18 @@ export default function ContactForm(){
   const [allowTexting, setAllowTexting] = useState(false)
   const [isEmergency, setIsEmergency] = useState(false)
 
-
   const services = [
     'Abdominal Ultrasound',
     'Second Opinions / Teleconsult'
   ]
 
-  // Scroll to top of contact section when switching between states
+  // Only scroll to contact section when switching TO 'ok' status (after form submission)
   useEffect(() => {
-    const contactSection = document.getElementById('contact')
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (status === 'ok') {
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }, [status])
 

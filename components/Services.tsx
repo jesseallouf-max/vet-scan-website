@@ -6,16 +6,19 @@ export default function Services(){
     <section id="services" className="section">
       <h2 className="text-3xl md:text-4xl font-semibold">Services</h2>
       <div className="mt-8 grid gap-6 md:grid-cols-2">
-        <motion.div whileHover={{y:-2}} className="card p-6">
+        <motion.div whileHover={{y:-2}} >
+          <div className="card p-6">
           <div className="flex items-start gap-4">
             <div className="text-brand-primary"><IconScan/></div>
             <div>
               <h3 className="text-xl font-semibold">Abdominal Ultrasound</h3>
               <p className="mt-2 text-gray-700">Vomiting, masses, staging, chronic disease workups. Performed using your in-hospital ultrasound equipment.</p>
             </div>
+            </div>
           </div>
         </motion.div>
-        <motion.div whileHover={{y:-2}} className="card p-6">
+        <motion.div whileHover={{y:-2}} >
+          <div className="card p-6">
           <div className="flex items-start gap-4">
             <div className="text-brand-primary"><IconConsult/></div>
             <div>
@@ -23,6 +26,7 @@ export default function Services(){
               <p className="mt-2 text-gray-700">Diagnostic review and case consultation for clinics seeking a second set of eyes.</p>
             </div>
           </div>
+            </div>
         </motion.div>
       </div>
     </section>

@@ -33,8 +33,9 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.2 }}
-          className="order-2"
-        >
+          >
+          <div className="order-2">
+        
           <h1
             id="hero-heading"
             className="max-w-2xl text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight text-left"
@@ -74,6 +75,7 @@ export default function Hero() {
               BOOK NOW
             </a>
           </div>
+            </div>
         </motion.div>
       </div>
     </section>

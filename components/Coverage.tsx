@@ -84,7 +84,7 @@ export default function Coverage() {
   }, []);
 
   // Shared function to create pins
-  const createPins = (map, google) => {
+  const createPins = (map: any, google: any) => {
     // Add CSS for pins (only once)
     if (!document.querySelector('#vs-pin-styles')) {
       const css = `

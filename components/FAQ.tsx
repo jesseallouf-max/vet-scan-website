@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:()=>void}){
   return (
     <div className="border-b border-gray-200 last:border-b-0">
-      <button 
+      <button
         onClick={onToggle} 
         className={`w-full text-left py-4 font-semibold text-lg transition-colors duration-200 flex items-center justify-between group focus:outline-none ${
           isOpen ? 'text-teal-700' : 'text-gray-900 md:hover:text-teal-700'
@@ -31,6 +31,7 @@ function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:(
     <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
   </div>
 </motion.div>
+      </div>
   )
 }
 

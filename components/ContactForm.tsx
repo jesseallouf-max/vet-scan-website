@@ -14,12 +14,15 @@ export default function ContactForm(){
     'Second Opinions / Teleconsult'
   ]
 
-  // Only scroll to contact section when switching TO 'ok' status (after form submission)
+  // Scroll to contact section when switching between 'ok' and 'idle' states
   useEffect(() => {
-    if (status === 'ok') {
-      const contactSection = document.getElementById('contact')
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (status === 'ok' || status === 'idle') {
+      // Only scroll if we're not on initial page load
+      if (document.readyState === 'complete') {
+        const contactSection = document.getElementById('contact')
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
       }
     }
   }, [status])

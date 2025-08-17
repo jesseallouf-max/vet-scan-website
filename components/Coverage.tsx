@@ -160,7 +160,7 @@ export default function Coverage() {
   };
 
   // Shared function to add GeoJSON
-  const addGeoJSON = async (map) => {
+  const addGeoJSON = async (map: any) => {
     try {
       const resp = await fetch("/data/manhattan-south125.geojson", { cache: "force-cache" });
       if (resp.ok) {

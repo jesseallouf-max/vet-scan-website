@@ -207,8 +207,8 @@ export default function ContactForm(){
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg"
-                >
+                  >
+                 <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg">
                   {services.map((service) => (
                     <button
                       key={service}

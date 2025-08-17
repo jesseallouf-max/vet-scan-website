@@ -55,7 +55,7 @@ export default function About(){
                       <Image src={c.logo} alt={c.alt} fill sizes="(min-width: 1024px) 16rem, (min-width: 768px) 12rem, 100vw" className="object-contain" />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center rounded-md bg-neutral-100 text-base font-semibold text-neutral-700">
-                        {c.fallback ?? "Logo"}
+                        {"Logo"}
                       </div>
                     )}
                   </div>

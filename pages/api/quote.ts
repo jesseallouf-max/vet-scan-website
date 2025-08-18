@@ -184,30 +184,6 @@ const emailData = {
   },
 }
 
-    const emailData = {
-      personalizations: [{
-        to: [{ email: toEmail }],
-        subject: emailSubject,
-      }],
-      from: {
-        email: 'noreply@vetscannyc.com',
-        name: 'VetScan NYC Contact Form'
-      },
-      reply_to: {
-        email: 'vetscannyc@gmail.com'
-      },
-      content: [
-        {
-          type: 'text/plain',
-          value: JSON.stringify(data, null, 2)
-        },
-        {
-          type: 'text/html',
-          value: createEmailTemplate(data, sheetUrl)
-        }
-      ]
-    }
-
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
       headers: {

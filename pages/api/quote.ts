@@ -22,8 +22,14 @@ type FormData = z.infer<typeof schema> & {
   timestamp: string
 }
 
+// Helper function to format phone for tel: links
+const formatPhoneForTel = (phone: string): string => {
+  // Remove all non-digits
+  const digits = phone.replace(/\D/g, '')
+  // Add +1 if it's a 10-digit US number
+  return digits.length === 10 ? `+1${digits}` : `+${digits}`
+}
 // Enhanced HTML email template
-const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
   const emergencyBadge = data.isEmergency 
     ? '<span style="background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase;">🚨 EMERGENCY</span>'
     : ''
@@ -42,7 +48,15 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
     <!-- Header -->
     <div style="background: linear-gradient(135deg, #146C60 0%, #18958b 100%); color: white; padding: 24px; border-radius: 8px 8px 0 0;">
       <h1 style="margin: 0; font-size: 24px; font-weight: 600;">New Quote Request</h1>
-      <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 14px;">Received on ${new Date(data.timestamp).toLocaleString()}</p>
+      <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 14px;">Received on ${new Date(data.timestamp).toLocaleString('en-US', { 
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: 'long', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      })}</p>
       <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
         ${emergencyBadge}
       </div>
@@ -73,7 +87,7 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
             <p style="margin: 0; color: #0c4a42;"><strong>📧 Email:</strong></p>
             <p style="margin: 4px 0 0 0;"><a href="mailto:${data.email}" style="color: #146C60; text-decoration: none;">${data.email}</a></p>
           </div>
-          ${data.phone ? `
+const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
           <div style="background: #f0fdf4; padding: 12px; border-radius: 6px; flex: 1; min-width: 200px;">
             <p style="margin: 0; color: #059669;"><strong>📱 Phone:</strong></p>
             <p style="margin: 4px 0 0 0;"><a href="tel:${data.phone}" style="color: #065f46; text-decoration: none;">${data.phone}</a></p>
@@ -103,7 +117,7 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
             📧 Reply via Email
           </a>
           ${data.phone ? `
-          <a href="tel:${data.phone}" 
+          <a href="tel:${formatPhoneForTel(data.phone)}" 
              style="background: #10b981; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; display: inline-block;">
             📞 Call Now
           </a>
@@ -122,7 +136,7 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
     <!-- Footer -->
     <div style="background: #f8fafc; padding: 16px 24px; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
       <p style="margin: 0; color: #6b7280; font-size: 12px; text-align: center;">
-        VetScan NYC - On Demand Veterinary Ultrasound Services<br>
+        VetScan NYC - Mobile Veterinary Ultrasound Services<br>
         ${sheetUrl ? `This inquiry was automatically logged to your <a href="${sheetUrl}" style="color: #146C60;">tracking sheet</a>.` : 'Quote request processed successfully.'}
       </p>
     </div>
@@ -164,16 +178,16 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
         email: 'vetscannyc@gmail.com',
         name: 'Vet Scan NYC'
       },
-     content: [
-  {
-    type: 'text/plain',
-    value: JSON.stringify(data, null, 2) // Plain text FIRST
-  },
-  {
-    type: 'text/html', 
-    value: createEmailTemplate(data, sheetUrl) // HTML SECOND
-  }
-]
+      content: [
+        {
+          type: 'text/plain',
+          value: JSON.stringify(data, null, 2) // Plain text comes first
+        },
+        {
+          type: 'text/html',
+          value: createEmailTemplate(data, sheetUrl) // HTML comes second
+        }
+      ]
     }
 
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {

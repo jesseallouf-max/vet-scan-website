@@ -164,16 +164,16 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
         email: 'vetscannyc@gmail.com',
         name: 'Vet Scan NYC'
       },
-      content: [
-        {
-          type: 'text/html',
-          value: createEmailTemplate(data, sheetUrl)
-        },
-        {
-          type: 'text/plain',
-          value: JSON.stringify(data, null, 2) // Fallback plain text
-        }
-      ]
+     content: [
+  {
+    type: 'text/plain',
+    value: JSON.stringify(data, null, 2) // Plain text FIRST
+  },
+  {
+    type: 'text/html', 
+    value: createEmailTemplate(data, sheetUrl) // HTML SECOND
+  }
+]
     }
 
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {

@@ -285,7 +285,7 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
         subject: ' ', // Minimal subject (just a space) to avoid parentheses
       }],
       from: {
-        email: 'noreply@vetscannyc.com',
+        email: 'vetscannyc@gmail.com',
         name: 'VetScan NYC'
       },
       content: [

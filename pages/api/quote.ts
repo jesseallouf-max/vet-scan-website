@@ -260,12 +260,12 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
     
     // Create short SMS message (160 char limit)
     const emergencyFlag = data.isEmergency ? 'EMERGENCY ' : ''
-    const shortMessage = `${emergencyFlag} ${data.clinicName} - ${data.contactName}. Check email for details.`
+    const shortMessage = `${emergencyFlag}New inquiry: ${data.clinicName} - ${data.contactName} (${data.role}). Check email for details.`
     
     const smsData = {
       personalizations: [{
         to: [{ email: smsEmail }],
-        subject: 'New VetScan Inquiry:',
+        // Remove subject line to avoid parentheses in SMS
       }],
       from: {
         email: 'vetscannyc@gmail.com',

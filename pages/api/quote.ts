@@ -218,8 +218,20 @@ async function addToGoogleSheet(data: FormData): Promise<string | null> {
     const sheets = google.sheets({ version: 'v4', auth })
     const spreadsheetId = process.env.GOOGLE_SHEET_ID
 
+    // Format timestamp to be human-readable in Eastern time
+    const humanTimestamp = new Date(data.timestamp).toLocaleString('en-US', {
+      timeZone: 'America/New_York',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    })
+
     const rowData = [
-      data.timestamp,
+      humanTimestamp, // Human-readable instead of ISO string
       data.clinicName,
       data.contactName,
       data.role,

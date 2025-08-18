@@ -154,8 +154,6 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
       ? `🚨 EMERGENCY Quote Request — ${data.clinicName}`
       : `New Quote Request — ${data.clinicName}`
 
-    const toEmail = process.env.CONTACT_TO || 'vetscannyc@gmail.com'
-
     // put these right before you build emailData
 const toEmail   = process.env.CONTACT_TO || 'vetscannyc@gmail.com'
 const fromEmail = process.env.CONTACT_FROM || 'noreply@vetscannyc.com'

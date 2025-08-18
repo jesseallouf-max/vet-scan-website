@@ -156,6 +156,34 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
 
     const toEmail = process.env.CONTACT_TO || 'vetscannyc@gmail.com'
 
+    // put these right before you build emailData
+const toEmail   = process.env.CONTACT_TO || 'vetscannyc@gmail.com'
+const fromEmail = process.env.CONTACT_FROM || 'noreply@vetscannyc.com'
+const fromName  = process.env.CONTACT_FROM_NAME || 'VetScan NYC'
+const replyTo   = process.env.REPLY_TO || 'vetscannyc@gmail.com'
+
+const emailData = {
+  personalizations: [{
+    to: [{ email: toEmail }],
+    subject: emailSubject,
+  }],
+  from: { email: fromEmail, name: fromName },
+  reply_to: { email: replyTo, name: fromName },
+
+  // keep the content you already have
+  content: [
+    { type: 'text/plain', value: JSON.stringify(data, null, 2) },
+    { type: 'text/html',  value: createEmailTemplate(data, sheetUrl) }
+  ],
+
+  // recommended to reduce spammy signals in inbox list view
+  tracking_settings: {
+    click_tracking: { enable: false },
+    open_tracking:  { enable: false },
+    subscription_tracking: { enable: false },
+  },
+}
+
     const emailData = {
       personalizations: [{
         to: [{ email: toEmail }],

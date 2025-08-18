@@ -265,7 +265,7 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
     const smsData = {
       personalizations: [{
         to: [{ email: smsEmail }],
-        subject: 'VetScan Alert', // Keep subject short
+        subject: 'VetScan Alert',
       }],
       from: {
         email: 'vetscannyc@gmail.com',
@@ -276,7 +276,13 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
           type: 'text/plain',
           value: shortMessage
         }
-      ]
+      ],
+      // THIS IS THE KEY: Bypass all suppression lists for SMS
+      mail_settings: {
+        bypass_list_management: {
+          enable: true
+        }
+      }
     }
 
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {

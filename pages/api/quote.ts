@@ -162,8 +162,11 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
         subject: emailSubject,
       }],
       from: {
-        email: 'vetscannyc@gmail.com',
-        name: 'Vet Scan NYC'
+        email: 'noreply@vetscannyc.com',
+        name: 'VetScan NYC Contact Form'
+      },
+      reply_to: {
+        email: 'vetscannyc@gmail.com'
       },
       content: [
         {
@@ -280,7 +283,7 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
         subject: ' ', // Minimal subject (just a space) to avoid parentheses
       }],
       from: {
-        email: 'vetscannyc@gmail.com',
+        email: 'noreply@vetscannyc.com',
         name: 'VetScan NYC'
       },
       content: [

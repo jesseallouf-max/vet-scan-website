@@ -30,6 +30,7 @@ const formatPhoneForTel = (phone: string): string => {
   return digits.length === 10 ? `+1${digits}` : `+${digits}`
 }
 // Enhanced HTML email template
+const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
   const emergencyBadge = data.isEmergency 
     ? '<span style="background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase;">🚨 EMERGENCY</span>'
     : ''

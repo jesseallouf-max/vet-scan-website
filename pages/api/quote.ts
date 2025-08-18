@@ -125,7 +125,7 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
 
     <div style="background: #f8fafc; padding: 16px 24px; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
       <p style="margin: 0; color: #6b7280; font-size: 12px; text-align: center;">
-        VetScan NYC - Mobile Veterinary Ultrasound Services<br>
+        VetScan NYC - On Demand Veterinary Ultrasound Services<br>
         ${sheetUrl ? `This inquiry was automatically logged to your <a href="${sheetUrl}" style="color: #146C60;">tracking sheet</a>.` : 'Quote request processed successfully.'}
       </p>
     </div>
@@ -260,12 +260,12 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
     
     // Create short SMS message (160 char limit)
     const emergencyFlag = data.isEmergency ? 'EMERGENCY ' : ''
-    const shortMessage = `${emergencyFlag}New inquiry: ${data.clinicName} - ${data.contactName}. Check email for details.`
+    const shortMessage = `${emergencyFlag}: ${data.clinicName} - ${data.contactName}. Check email for details.`
     
     const smsData = {
       personalizations: [{
         to: [{ email: smsEmail }],
-        subject: 'VetScan Alert',
+        subject: 'VetScan New Inquiry',
       }],
       from: {
         email: 'vetscannyc@gmail.com',

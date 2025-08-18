@@ -122,7 +122,7 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
     <!-- Footer -->
     <div style="background: #f8fafc; padding: 16px 24px; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
       <p style="margin: 0; color: #6b7280; font-size: 12px; text-align: center;">
-        VetScan NYC - Mobile Veterinary Ultrasound Services<br>
+        VetScan NYC - On Demand Veterinary Ultrasound Services<br>
         ${sheetUrl ? `This inquiry was automatically logged to your <a href="${sheetUrl}" style="color: #146C60;">tracking sheet</a>.` : 'Quote request processed successfully.'}
       </p>
     </div>

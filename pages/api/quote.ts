@@ -249,7 +249,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 2. Send enhanced email (keeping your existing SMTP logic)
     if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
       console.log('Sending enhanced email...')
-      const transporter = nodemailer.createTransporter({
+      const transporter = nodemailer.createTransport({
         host: SMTP_HOST,
         port: Number(SMTP_PORT || 587),
         secure: false,

@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { z } from 'zod'
 import fetch from 'cross-fetch'
-import nodemailer from 'nodemailer'
 import { google } from 'googleapis'
 import twilio from 'twilio'
 
@@ -142,6 +141,62 @@ const createSMSMessage = (data: FormData, sheetUrl?: string) => {
   return `${emergencyFlag}New quote request from ${data.clinicName}. Contact: ${data.contactName}${phone}. Service: ${data.service}.${sheetText}`
 }
 
+// SendGrid email sending
+async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<void> {
+  if (!process.env.SENDGRID_API_KEY) {
+    console.log('SendGrid not configured, skipping email...')
+    return
+  }
+
+  try {
+    const emailSubject = data.isEmergency 
+      ? `🚨 EMERGENCY Quote Request — ${data.clinicName}`
+      : `New Quote Request — ${data.clinicName}`
+
+    const toEmail = process.env.CONTACT_TO || 'vetscannyc@gmail.com'
+
+    const emailData = {
+      personalizations: [{
+        to: [{ email: toEmail }],
+        subject: emailSubject,
+      }],
+      from: {
+        email: 'vetscannyc@gmail.com',
+        name: 'Vet Scan NYC'
+      },
+      content: [
+        {
+          type: 'text/html',
+          value: createEmailTemplate(data, sheetUrl)
+        },
+        {
+          type: 'text/plain',
+          value: JSON.stringify(data, null, 2) // Fallback plain text
+        }
+      ]
+    }
+
+    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(emailData),
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`SendGrid error: ${response.status} - ${errorText}`)
+    }
+
+    console.log('Email sent successfully via SendGrid')
+  } catch (error) {
+    console.error('SendGrid error:', error)
+    throw error // Don't silently fail email sending
+  }
+}
+
 // Google Sheets integration
 async function addToGoogleSheet(data: FormData): Promise<string | null> {
   // Only attempt if we have the required environment variables
@@ -164,7 +219,7 @@ async function addToGoogleSheet(data: FormData): Promise<string | null> {
     const sheets = google.sheets({ version: 'v4', auth })
     const spreadsheetId = process.env.GOOGLE_SHEET_ID
 
-    // Prepare row data (removed vetOnly field)
+    // Prepare row data
     const rowData = [
       data.timestamp,
       data.clinicName,
@@ -238,61 +293,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       timestamp: new Date().toISOString(),
     }
 
-    // Get environment variables
-    const { SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_PORT, CONTACT_TO, HUBSPOT_TOKEN } = process.env
-    const toEmail = CONTACT_TO || 'vetscannyc@gmail.com'
-
     // 1. Add to Google Sheet first (we need the URL for notifications)
     console.log('Adding to Google Sheet...')
     const sheetUrl = await addToGoogleSheet(formDataWithTimestamp)
 
-    // 2. Send enhanced email (keeping your existing SMTP logic)
-    if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
-      console.log('Sending enhanced email...')
-      const transporter = nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: Number(SMTP_PORT || 587),
-        secure: false,
-        auth: {
-          user: SMTP_USER,
-          pass: SMTP_PASS,
-        },
-      })
-
-      const emailSubject = formDataWithTimestamp.isEmergency 
-        ? `🚨 EMERGENCY Quote Request — ${data.clinicName}`
-        : `New Quote Request — ${data.clinicName}`
-
-      const previewText = `${data.service} service requested by ${data.contactName} (${data.role}) at ${data.clinicName}`
-
-      await transporter.sendMail({
-        from: '"Vet Scan NYC" <no-reply@vetscannyc.com>',
-        to: toEmail,
-        subject: emailSubject,
-        html: createEmailTemplate(formDataWithTimestamp, sheetUrl || undefined),
-        // Fallback to your existing plain text for clients that don't support HTML
-        text: JSON.stringify(formDataWithTimestamp, null, 2),
-        // Preview text for email clients
-        headers: {
-          'X-Preview-Text': previewText,
-        },
-      })
-    } else {
-      console.log('Email (no SMTP configured):', formDataWithTimestamp)
-    }
+    // 2. Send enhanced email via SendGrid
+    console.log('Sending enhanced email via SendGrid...')
+    await sendEmailViaSendGrid(formDataWithTimestamp, sheetUrl || undefined)
 
     // 3. Send SMS notification
     console.log('Sending SMS notification...')
     await sendSMSNotification(formDataWithTimestamp, sheetUrl || undefined)
 
     // 4. Keep your existing HubSpot integration for future use
-    if (HUBSPOT_TOKEN) {
-      // Keep your existing HubSpot integration for future use
-      // (Currently not active per Dr. Khan's preference for direct email)
+    if (process.env.HUBSPOT_TOKEN) {
       console.log('Adding to HubSpot CRM for future reference...')
       const hs = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${HUBSPOT_TOKEN}`,
+        'Authorization': `Bearer ${process.env.HUBSPOT_TOKEN}`,
       }
 
       // Create/update contact
@@ -306,7 +324,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             phone: data.phone || '',
             company: data.clinicName,
             jobtitle: data.role,
-            // Add custom properties for new fields if needed
             emergency_request: data.isEmergency ? 'true' : 'false',
             allows_texting: data.allowTexting ? 'true' : 'false',
           },
@@ -340,10 +357,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json({ 
       ok: true,
       features: {
-        email: SMTP_HOST && SMTP_USER && SMTP_PASS ? 'sent' : 'not_configured',
+        email: process.env.SENDGRID_API_KEY ? 'sent' : 'not_configured',
         sms: process.env.TWILIO_ACCOUNT_SID ? 'sent' : 'not_configured',
         sheets: sheetUrl ? 'logged' : 'not_configured',
-        hubspot: HUBSPOT_TOKEN ? 'logged' : 'not_configured',
+        hubspot: process.env.HUBSPOT_TOKEN ? 'logged' : 'not_configured',
       }
     })
 

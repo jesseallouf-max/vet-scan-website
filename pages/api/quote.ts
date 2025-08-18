@@ -4,7 +4,6 @@ import fetch from 'cross-fetch'
 import { google } from 'googleapis'
 import twilio from 'twilio'
 
-// Enhanced schema to match your existing structure + new fields
 const schema = z.object({
   clinicName: z.string().min(1),
   contactName: z.string().min(1),
@@ -13,7 +12,6 @@ const schema = z.object({
   phone: z.string().optional().nullable(),
   service: z.string().min(1),
   notes: z.string().optional().nullable(),
-  // New optional fields for enhanced features
   isEmergency: z.boolean().optional().default(false),
   allowTexting: z.boolean().optional().default(false),
 })
@@ -24,19 +22,16 @@ type FormData = z.infer<typeof schema> & {
 
 // Helper function to format phone for tel: links
 const formatPhoneForTel = (phone: string): string => {
-  // Remove all non-digits
   const digits = phone.replace(/\D/g, '')
-  // Add +1 if it's a 10-digit US number
   return digits.length === 10 ? `+1${digits}` : `+${digits}`
 }
-// Enhanced HTML email template
+
 const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
   const emergencyBadge = data.isEmergency 
     ? '<span style="background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase;">🚨 EMERGENCY</span>'
     : ''
 
-  return `
-<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -46,7 +41,6 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc;">
   <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
     
-    <!-- Header -->
     <div style="background: linear-gradient(135deg, #146C60 0%, #18958b 100%); color: white; padding: 24px; border-radius: 8px 8px 0 0;">
       <h1 style="margin: 0; font-size: 24px; font-weight: 600;">New Quote Request</h1>
       <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 14px;">Received on ${new Date(data.timestamp).toLocaleString('en-US', { 
@@ -58,15 +52,13 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
         minute: '2-digit',
         hour12: true
       })}</p>
-      <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+      <div style="margin-top: 12px;">
         ${emergencyBadge}
       </div>
     </div>
 
-    <!-- Content -->
     <div style="padding: 24px;">
       
-      <!-- Clinic Information -->
       <div style="margin-bottom: 24px;">
         <h2 style="color: #1f2937; font-size: 18px; font-weight: 600; margin: 0 0 16px 0; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
           🏥 Clinic Information
@@ -78,7 +70,6 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
         </div>
       </div>
 
-      <!-- Contact Details -->
       <div style="margin-bottom: 24px;">
         <h2 style="color: #1f2937; font-size: 18px; font-weight: 600; margin: 0 0 16px 0; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
           📞 Contact Details
@@ -88,17 +79,16 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
             <p style="margin: 0; color: #0c4a42;"><strong>📧 Email:</strong></p>
             <p style="margin: 4px 0 0 0;"><a href="mailto:${data.email}" style="color: #146C60; text-decoration: none;">${data.email}</a></p>
           </div>
-const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
+          ${data.phone ? `
           <div style="background: #f0fdf4; padding: 12px; border-radius: 6px; flex: 1; min-width: 200px;">
             <p style="margin: 0; color: #059669;"><strong>📱 Phone:</strong></p>
-            <p style="margin: 4px 0 0 0;"><a href="tel:${data.phone}" style="color: #065f46; text-decoration: none;">${data.phone}</a></p>
+            <p style="margin: 4px 0 0 0;"><a href="tel:${formatPhoneForTel(data.phone)}" style="color: #065f46; text-decoration: none;">${data.phone}</a></p>
             ${data.allowTexting ? '<p style="margin: 4px 0 0 0; font-size: 12px; color: #059669;">✅ Texting OK</p>' : ''}
           </div>
           ` : ''}
         </div>
       </div>
 
-      <!-- Service Information -->
       <div style="margin-bottom: 24px;">
         <h2 style="color: #1f2937; font-size: 18px; font-weight: 600; margin: 0 0 16px 0; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
           🔬 Service Details
@@ -109,7 +99,6 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
         </div>
       </div>
 
-      <!-- Quick Actions -->
       <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
         <h3 style="margin: 0 0 16px 0; color: #374151; font-size: 16px;">Quick Actions</h3>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -134,7 +123,6 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
 
     </div>
 
-    <!-- Footer -->
     <div style="background: #f8fafc; padding: 16px 24px; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
       <p style="margin: 0; color: #6b7280; font-size: 12px; text-align: center;">
         VetScan NYC - Mobile Veterinary Ultrasound Services<br>
@@ -147,7 +135,6 @@ const createEmailTemplate = (data: FormData, sheetUrl?: string) => {
 </html>`
 }
 
-// SMS message template
 const createSMSMessage = (data: FormData, sheetUrl?: string) => {
   const emergencyFlag = data.isEmergency ? '🚨 EMERGENCY - ' : ''
   const phone = data.phone ? ` (${data.phone})` : ''
@@ -156,7 +143,6 @@ const createSMSMessage = (data: FormData, sheetUrl?: string) => {
   return `${emergencyFlag}New quote request from ${data.clinicName}. Contact: ${data.contactName}${phone}. Service: ${data.service}.${sheetText}`
 }
 
-// SendGrid email sending
 async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<void> {
   if (!process.env.SENDGRID_API_KEY) {
     console.log('SendGrid not configured, skipping email...')
@@ -182,11 +168,11 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
       content: [
         {
           type: 'text/plain',
-          value: JSON.stringify(data, null, 2) // Plain text comes first
+          value: JSON.stringify(data, null, 2)
         },
         {
           type: 'text/html',
-          value: createEmailTemplate(data, sheetUrl) // HTML comes second
+          value: createEmailTemplate(data, sheetUrl)
         }
       ]
     }
@@ -208,13 +194,11 @@ async function sendEmailViaSendGrid(data: FormData, sheetUrl?: string): Promise<
     console.log('Email sent successfully via SendGrid')
   } catch (error) {
     console.error('SendGrid error:', error)
-    throw error // Don't silently fail email sending
+    throw error
   }
 }
 
-// Google Sheets integration
 async function addToGoogleSheet(data: FormData): Promise<string | null> {
-  // Only attempt if we have the required environment variables
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || 
       !process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || 
       !process.env.GOOGLE_SHEET_ID) {
@@ -234,7 +218,6 @@ async function addToGoogleSheet(data: FormData): Promise<string | null> {
     const sheets = google.sheets({ version: 'v4', auth })
     const spreadsheetId = process.env.GOOGLE_SHEET_ID
 
-    // Prepare row data
     const rowData = [
       data.timestamp,
       data.clinicName,
@@ -248,7 +231,6 @@ async function addToGoogleSheet(data: FormData): Promise<string | null> {
       data.allowTexting ? 'YES' : 'NO',
     ]
 
-    // Add row to sheet
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: 'Sheet1!A:J',
@@ -261,13 +243,11 @@ async function addToGoogleSheet(data: FormData): Promise<string | null> {
     return `https://docs.google.com/spreadsheets/d/${spreadsheetId}`
   } catch (error) {
     console.error('Google Sheets error:', error)
-    return null // Don't fail the whole request if sheets fails
+    return null
   }
 }
 
-// SMS notification
 async function sendSMSNotification(data: FormData, sheetUrl?: string): Promise<void> {
-  // Only attempt if we have the required environment variables
   if (!process.env.TWILIO_ACCOUNT_SID || 
       !process.env.TWILIO_AUTH_TOKEN || 
       !process.env.TWILIO_FROM_NUMBER || 
@@ -291,7 +271,6 @@ async function sendSMSNotification(data: FormData, sheetUrl?: string): Promise<v
     console.log('SMS sent successfully')
   } catch (error) {
     console.error('SMS error:', error)
-    // Don't fail the whole request if SMS fails
   }
 }
 
@@ -301,26 +280,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    // Parse and validate form data using your existing schema
     const data = schema.parse(req.body)
     const formDataWithTimestamp: FormData = {
       ...data,
       timestamp: new Date().toISOString(),
     }
 
-    // 1. Add to Google Sheet first (we need the URL for notifications)
     console.log('Adding to Google Sheet...')
     const sheetUrl = await addToGoogleSheet(formDataWithTimestamp)
 
-    // 2. Send enhanced email via SendGrid
     console.log('Sending enhanced email via SendGrid...')
     await sendEmailViaSendGrid(formDataWithTimestamp, sheetUrl || undefined)
 
-    // 3. Send SMS notification
     console.log('Sending SMS notification...')
     await sendSMSNotification(formDataWithTimestamp, sheetUrl || undefined)
 
-    // 4. Keep your existing HubSpot integration for future use
     if (process.env.HUBSPOT_TOKEN) {
       console.log('Adding to HubSpot CRM for future reference...')
       const hs = {
@@ -328,7 +302,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         'Authorization': `Bearer ${process.env.HUBSPOT_TOKEN}`,
       }
 
-      // Create/update contact
       await fetch('https://api.hubapi.com/crm/v3/objects/contacts?hapikey=', {
         method: 'POST',
         headers: hs,
@@ -345,7 +318,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }),
       })
 
-      // Create note with enhanced information
       const noteBody = [
         `Service: ${data.service}`,
         `Clinic: ${data.clinicName}`,

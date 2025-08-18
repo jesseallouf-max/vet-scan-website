@@ -247,30 +247,56 @@ async function addToGoogleSheet(data: FormData): Promise<string | null> {
   }
 }
 
-async function sendSMSNotification(data: FormData, sheetUrl?: string): Promise<void> {
-  if (!process.env.TWILIO_ACCOUNT_SID || 
-      !process.env.TWILIO_AUTH_TOKEN || 
-      !process.env.TWILIO_FROM_NUMBER || 
-      !process.env.DR_KHAN_PHONE) {
-    console.log('SMS not configured, skipping...')
+async function sendSMSViaEmail(data: FormData): Promise<void> {
+  if (!process.env.SENDGRID_API_KEY || !process.env.DR_KHAN_PHONE) {
+    console.log('SMS via email not configured, skipping...')
     return
   }
 
   try {
-    const twilioClient = twilio(
-      process.env.TWILIO_ACCOUNT_SID,
-      process.env.TWILIO_AUTH_TOKEN
-    )
+    // Convert phone number to Verizon email format
+    const phoneDigits = process.env.DR_KHAN_PHONE.replace(/\D/g, '')
+    const smsEmail = `${phoneDigits}@vtext.com`
+    
+    // Create short SMS message (160 char limit)
+    const emergencyFlag = data.isEmergency ? 'EMERGENCY ' : ''
+    const shortMessage = `${emergencyFlag}New inquiry: ${data.clinicName} - ${data.contactName}. Check email for details.`
+    
+    const smsData = {
+      personalizations: [{
+        to: [{ email: smsEmail }],
+        subject: 'VetScan Alert', // Keep subject short
+      }],
+      from: {
+        email: 'vetscannyc@gmail.com',
+        name: 'VetScan NYC'
+      },
+      content: [
+        {
+          type: 'text/plain',
+          value: shortMessage
+        }
+      ]
+    }
 
-    await twilioClient.messages.create({
-      body: createSMSMessage(data, sheetUrl),
-      from: process.env.TWILIO_FROM_NUMBER,
-      to: process.env.DR_KHAN_PHONE,
+    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(smsData),
     })
 
-    console.log('SMS sent successfully')
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`SMS email error: ${response.status} - ${errorText}`)
+    }
+
+    console.log('SMS sent successfully via email')
   } catch (error) {
-    console.error('SMS error:', error)
+    console.error('SMS email error:', error)
+    // Don't fail the whole request if SMS fails
   }
 }
 
@@ -292,8 +318,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('Sending enhanced email via SendGrid...')
     await sendEmailViaSendGrid(formDataWithTimestamp, sheetUrl || undefined)
 
-    console.log('Sending SMS notification...')
-    await sendSMSNotification(formDataWithTimestamp, sheetUrl || undefined)
+    console.log('Sending SMS via email...')
+    await sendSMSViaEmail(formDataWithTimestamp)
 
     if (process.env.HUBSPOT_TOKEN) {
       console.log('Adding to HubSpot CRM for future reference...')
@@ -345,7 +371,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ok: true,
       features: {
         email: process.env.SENDGRID_API_KEY ? 'sent' : 'not_configured',
-        sms: process.env.TWILIO_ACCOUNT_SID ? 'sent' : 'not_configured',
+        sms: process.env.DR_KHAN_PHONE ? 'sent' : 'not_configured',
         sheets: sheetUrl ? 'logged' : 'not_configured',
         hubspot: process.env.HUBSPOT_TOKEN ? 'logged' : 'not_configured',
       }

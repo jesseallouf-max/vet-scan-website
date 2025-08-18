@@ -265,7 +265,7 @@ async function sendSMSViaEmail(data: FormData): Promise<void> {
     const smsData = {
       personalizations: [{
         to: [{ email: smsEmail }],
-        // Remove subject line to avoid parentheses in SMS
+        subject: ' ', // Minimal subject (just a space) to avoid parentheses
       }],
       from: {
         email: 'vetscannyc@gmail.com',

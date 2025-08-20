@@ -48,11 +48,11 @@ export default function Header() {
         }`}
       >
         {/* md+: grid with fixed logo column so nav/CTA never shift when logo shrinks */}
-        <div
+                  <div
           ref={barRef}
           className={`${shrunk ? 'py-2 md:py-3 lg:py-4' : 'py-2 md:py-6 lg:py-7'}
             max-w-[1120px] mx-auto px-5 transition-all duration-200
-            flex items-center md:grid md:grid-cols-[340px_1fr_auto] lg:grid-cols-[380px_1fr_auto]`}
+            flex items-center md:grid md:grid-cols-[420px_1fr_auto] lg:grid-cols-[460px_1fr_auto]`}
         >
           {/* COL 1: Logo - UPDATED with BondVet approach */}
           <div className="flex items-center flex-shrink-0">
@@ -61,10 +61,10 @@ export default function Header() {
               <Image
                 src="/images/vet-scan-logo-horizontal.png"
                 alt="Vet Scan NYC"
-                width={220}
-                height={40}
+                width={400}
+                height={80}
                 priority
-                className="h-6 w-auto min-w-0 xs:h-7 sm:h-8"
+                className="h-5 w-auto min-w-0 max-w-[55vw] xs:h-6 sm:h-7"
               />
             </Link>
             {/* desktop logo (baseline nudge) */}
@@ -72,10 +72,10 @@ export default function Header() {
               <Image
                 src="/images/vet-scan-logo-horizontal.png"
                 alt="Vet Scan NYC"
-                width={380}
-                height={72}
+                width={500}
+                height={100}
                 priority
-                className={`w-auto relative top-[2px] ${shrunk ? 'h-9 lg:h-11' : 'h-12 lg:h-14'} transition-all duration-200`}
+                className={`w-auto relative top-[2px] ${shrunk ? 'h-8 lg:h-9' : 'h-10 lg:h-11'} transition-all duration-200`}
               />
             </Link>
           </div>

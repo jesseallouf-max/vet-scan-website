@@ -50,39 +50,39 @@ export default function Header() {
         {/* md+: grid with fixed logo column so nav/CTA never shift when logo shrinks */}
                   <div
           ref={barRef}
-          className={`${shrunk ? 'py-2 md:py-3 lg:py-4' : 'py-2 md:py-6 lg:py-7'}
+          className={`${shrunk ? 'py-2 lg:py-3 xl:py-4' : 'py-2 lg:py-6 xl:py-7'}
             max-w-[1120px] mx-auto px-5 transition-all duration-200
-            flex items-center md:grid md:grid-cols-[420px_1fr_auto] lg:grid-cols-[460px_1fr_auto]`}
+            flex items-center lg:grid lg:grid-cols-[420px_1fr_auto] xl:grid-cols-[460px_1fr_auto]`}
         >
           {/* COL 1: Logo - UPDATED with BondVet approach */}
           <div className="flex items-center flex-shrink-0">
             {/* mobile logo */}
-            <Link href="/" className="flex items-center md:hidden">
+            <Link href="/" className="flex items-center lg:hidden">
               <Image
                 src="/images/vet-scan-logo-horizontal.png"
                 alt="Vet Scan NYC"
                 width={400}
                 height={80}
                 priority
-                className="h-5 w-auto min-w-0 max-w-[55vw] xs:h-6 sm:h-7"
+                className="h-4 w-auto min-w-0 max-w-[50vw] xs:h-5 sm:h-6 md:h-7"
               />
             </Link>
             {/* desktop logo (baseline nudge) */}
-            <Link href="/" className="hidden md:flex items-center">
+            <Link href="/" className="hidden lg:flex items-center">
               <Image
                 src="/images/vet-scan-logo-horizontal.png"
                 alt="Vet Scan NYC"
                 width={500}
                 height={100}
                 priority
-                className={`w-auto relative top-[2px] ${shrunk ? 'h-8 lg:h-9' : 'h-10 lg:h-11'} transition-all duration-200`}
+                className={`w-auto relative top-[2px] ${shrunk ? 'h-8 xl:h-9' : 'h-10 xl:h-11'} transition-all duration-200`}
               />
             </Link>
           </div>
 
           {/* COL 2: Desktop nav */}
-          <div className="hidden md:flex items-center">
-            <nav className="flex items-center gap-6 lg:gap-8 uppercase font-bold text-[17px] lg:text-[18px] tracking-wide">
+          <div className="hidden lg:flex items-center">
+            <nav className="flex items-center gap-6 xl:gap-8 uppercase font-bold text-[17px] xl:text-[18px] tracking-wide">
               {[
                 { href: '#services', label: 'Services' },
                 { href: '#about', label: 'About' },
@@ -104,7 +104,7 @@ export default function Header() {
               <a
                 href="#contact" 
                 className="ml-4 inline-flex btn btn-primary font-bold uppercase tracking-wide whitespace-nowrap
-                           text-xs md:text-sm px-3 py-2 md:px-4 md:py-2.5"
+                           text-xs lg:text-sm px-3 py-2 lg:px-4 lg:py-2.5"
               >
                 BOOK NOW
               </a>
@@ -112,13 +112,13 @@ export default function Header() {
           </div>
 
           {/* COL 3: Mobile CTA + Hamburger - UPDATED */}
-          <div className="ml-auto flex items-center gap-1.5 xs:gap-2 sm:gap-3 md:hidden flex-shrink-0">
+          <div className="ml-auto flex items-center gap-1 xs:gap-1.5 sm:gap-2 md:gap-3 lg:hidden flex-shrink-0">
             {/* Mobile CTA */}
             {!open && (
               <a
                 href="#contact"
                 className="inline-flex btn btn-primary font-bold uppercase tracking-wide whitespace-nowrap
-                           text-[10px] px-2 py-1.5 xs:text-xs xs:px-2.5 xs:py-1.5 sm:text-xs sm:px-3 sm:py-2
+                           text-[9px] px-1.5 py-1 xs:text-[10px] xs:px-2 xs:py-1.5 sm:text-xs sm:px-2.5 sm:py-1.5 md:text-xs md:px-3 md:py-2
                            min-w-0 flex-shrink-0"
               >
                 BOOK NOW
@@ -128,12 +128,12 @@ export default function Header() {
             {/* Hamburger - smaller on tiny screens */}
             <button
               type="button"
-              className="inline-flex items-center justify-center h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 p-0 rounded-md focus:outline-none flex-shrink-0"
+              className="inline-flex items-center justify-center h-6 w-6 xs:h-7 xs:w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 p-0 rounded-md focus:outline-none flex-shrink-0"
               aria-label="Open menu"
               aria-expanded={open}
               onClick={() => setOpen(true)}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[22px] xs:h-[22px] sm:w-[30px] sm:h-[30px]">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[20px] xs:h-[20px] sm:w-[22px] sm:h-[22px] md:w-[30px] md:h-[30px]">
                 <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>
@@ -144,7 +144,7 @@ export default function Header() {
       {/* MOBILE PANEL (no CTA here) */}
       {open && (
         <div
-          className="fixed inset-x-0 bottom-0 z-50 md:hidden bg-[#146C60] text-white overflow-y-auto transition-transform duration-200"
+          className="fixed inset-x-0 bottom-0 z-50 lg:hidden bg-[#146C60] text-white overflow-y-auto transition-transform duration-200"
           style={{ top: barH }}
         >
           <div className="relative flex h-full flex-col pt-[env(safe-area-inset-top)]">

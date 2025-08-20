@@ -54,7 +54,7 @@ export default function Header() {
             max-w-[1120px] mx-auto px-5 transition-all duration-200
             flex items-center lg:grid lg:grid-cols-[420px_1fr_auto] xl:grid-cols-[460px_1fr_auto]`}
         >
-          {/* COL 1: Logo - UPDATED with BondVet approach */}
+          {/* COL 1: Logo - UPDATED with better sizing and centering */}
           <div className="flex items-center flex-shrink-0">
             {/* mobile logo */}
             <Link href="/" className="flex items-center lg:hidden">
@@ -64,7 +64,7 @@ export default function Header() {
                 width={400}
                 height={80}
                 priority
-                className="h-6 w-auto min-w-0 max-w-[62vw] xs:h-7 sm:h-8 md:h-9"
+                className="h-4 w-auto min-w-0 max-w-[55vw] relative top-[2px] xs:h-5 sm:h-7 md:h-8"
               />
             </Link>
             {/* desktop logo (baseline nudge) */}
@@ -111,29 +111,29 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* COL 3: Mobile CTA + Hamburger - UPDATED */}
-          <div className="ml-auto flex items-center gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:hidden flex-shrink-0">
+          {/* COL 3: Mobile CTA + Hamburger - UPDATED for narrow screens */}
+          <div className="ml-auto flex items-center gap-1.5 xs:gap-2 sm:gap-3 md:gap-4 lg:hidden flex-shrink-0">
             {/* Mobile CTA */}
             {!open && (
               <a
                 href="#contact"
                 className="inline-flex btn btn-primary font-bold uppercase tracking-wide whitespace-nowrap
-                           text-xs px-2.5 py-1.5 xs:text-xs xs:px-3 xs:py-2 sm:text-sm sm:px-4 sm:py-2 md:text-sm md:px-5 md:py-2.5
+                           text-[10px] px-2 py-1 xs:text-xs xs:px-2.5 xs:py-1.5 sm:text-sm sm:px-3 sm:py-2 md:text-sm md:px-4 md:py-2
                            min-w-0 flex-shrink-0"
               >
                 BOOK NOW
               </a>
             )}
 
-            {/* Hamburger - better sizing */}
+            {/* Hamburger - proper sizing for narrow screens */}
             <button
               type="button"
-              className="inline-flex items-center justify-center h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 p-0 rounded-md focus:outline-none flex-shrink-0"
+              className="inline-flex items-center justify-center h-7 w-7 xs:h-8 xs:w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 p-0 rounded-md focus:outline-none flex-shrink-0"
               aria-label="Open menu"
               aria-expanded={open}
               onClick={() => setOpen(true)}
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[24px] xs:h-[24px] sm:w-[26px] sm:h-[26px] md:w-[28px] md:h-[28px]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[22px] xs:h-[22px] sm:w-[24px] sm:h-[24px] md:w-[26px] md:h-[26px]">
                 <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>

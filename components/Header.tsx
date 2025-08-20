@@ -54,8 +54,8 @@ export default function Header() {
             max-w-[1120px] mx-auto px-5 transition-all duration-200
             flex items-center md:grid md:grid-cols-[340px_1fr_auto] lg:grid-cols-[380px_1fr_auto]`}
         >
-          {/* COL 1: Logo */}
-          <div className="flex items-center">
+          {/* COL 1: Logo - UPDATED with BondVet approach */}
+          <div className="flex items-center flex-shrink-0">
             {/* mobile logo */}
             <Link href="/" className="flex items-center md:hidden">
               <Image
@@ -64,7 +64,7 @@ export default function Header() {
                 width={220}
                 height={40}
                 priority
-                className="h-10 w-auto"
+                className="h-6 w-auto min-w-0 xs:h-7 sm:h-8"
               />
             </Link>
             {/* desktop logo (baseline nudge) */}
@@ -111,28 +111,29 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* COL 3: Mobile CTA + Hamburger (desktop hidden) */}
-          <div className="ml-auto flex items-center md:hidden">
-            {/* Mobile CTA — show only when panel is CLOSED */}
+          {/* COL 3: Mobile CTA + Hamburger - UPDATED */}
+          <div className="ml-auto flex items-center gap-1.5 xs:gap-2 sm:gap-3 md:hidden flex-shrink-0">
+            {/* Mobile CTA */}
             {!open && (
               <a
                 href="#contact"
-                className="ml-auto inline-flex btn btn-primary font-bold uppercase tracking-wide whitespace-nowrap
-                           text-xs px-3 py-2 mr-2"
+                className="inline-flex btn btn-primary font-bold uppercase tracking-wide whitespace-nowrap
+                           text-[10px] px-2 py-1.5 xs:text-xs xs:px-2.5 xs:py-1.5 sm:text-xs sm:px-3 sm:py-2
+                           min-w-0 flex-shrink-0"
               >
                 BOOK NOW
               </a>
             )}
 
-            {/* Hamburger */}
+            {/* Hamburger - smaller on tiny screens */}
             <button
               type="button"
-              className="inline-flex items-center justify-center h-10 w-10 p-0 rounded-md focus:outline-none focus:ring-0 outline-none"
+              className="inline-flex items-center justify-center h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 p-0 rounded-md focus:outline-none flex-shrink-0"
               aria-label="Open menu"
               aria-expanded={open}
               onClick={() => setOpen(true)}
             >
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[22px] xs:h-[22px] sm:w-[30px] sm:h-[30px]">
                 <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>

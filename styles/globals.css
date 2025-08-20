@@ -120,6 +120,7 @@ footer h3, footer h4 {
 
 /* Extra small breakpoint like BondVet for responsive mobile header */
 @media (min-width: 360px) {
+  .xs\:h-6 { height: 1.5rem; }
   .xs\:h-7 { height: 1.75rem; }
   .xs\:h-8 { height: 2rem; }
   .xs\:w-8 { width: 2rem; }

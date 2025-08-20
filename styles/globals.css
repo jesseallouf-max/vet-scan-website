@@ -128,15 +128,13 @@ footer h3, footer h4 {
 
 /* Extra small breakpoint like BondVet for responsive mobile header */
 @media (min-width: 360px) {
-  .xs\:h-7 { height: 1.75rem; }
+  .xs\:h-5 { height: 1.25rem; }
   .xs\:h-8 { height: 2rem; }
-  .xs\:h-9 { height: 2.25rem; }
-  .xs\:w-9 { width: 2.25rem; }
   .xs\:w-8 { width: 2rem; }
   .xs\:text-xs { font-size: 0.75rem; }
-  .xs\:px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-  .xs\:py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-  .xs\:gap-2\.5 { gap: 0.625rem; }
-  .xs\:w-\[24px\] { width: 24px; }
-  .xs\:h-\[24px\] { height: 24px; }
+  .xs\:px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+  .xs\:py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+  .xs\:gap-2 { gap: 0.5rem; }
+  .xs\:w-\[22px\] { width: 22px; }
+  .xs\:h-\[22px\] { height: 22px; }
 }

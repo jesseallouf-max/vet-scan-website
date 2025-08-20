@@ -64,7 +64,7 @@ export default function Header() {
                 width={400}
                 height={80}
                 priority
-                className="h-4 w-auto min-w-0 max-w-[50vw] xs:h-5 sm:h-6 md:h-7"
+                className="h-6 w-auto min-w-0 max-w-[62vw] xs:h-7 sm:h-8 md:h-9"
               />
             </Link>
             {/* desktop logo (baseline nudge) */}
@@ -112,28 +112,28 @@ export default function Header() {
           </div>
 
           {/* COL 3: Mobile CTA + Hamburger - UPDATED */}
-          <div className="ml-auto flex items-center gap-1 xs:gap-1.5 sm:gap-2 md:gap-3 lg:hidden flex-shrink-0">
+          <div className="ml-auto flex items-center gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:hidden flex-shrink-0">
             {/* Mobile CTA */}
             {!open && (
               <a
                 href="#contact"
                 className="inline-flex btn btn-primary font-bold uppercase tracking-wide whitespace-nowrap
-                           text-[9px] px-1.5 py-1 xs:text-[10px] xs:px-2 xs:py-1.5 sm:text-xs sm:px-2.5 sm:py-1.5 md:text-xs md:px-3 md:py-2
+                           text-xs px-2.5 py-1.5 xs:text-xs xs:px-3 xs:py-2 sm:text-sm sm:px-4 sm:py-2 md:text-sm md:px-5 md:py-2.5
                            min-w-0 flex-shrink-0"
               >
                 BOOK NOW
               </a>
             )}
 
-            {/* Hamburger - smaller on tiny screens */}
+            {/* Hamburger - better sizing */}
             <button
               type="button"
-              className="inline-flex items-center justify-center h-6 w-6 xs:h-7 xs:w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 p-0 rounded-md focus:outline-none flex-shrink-0"
+              className="inline-flex items-center justify-center h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 p-0 rounded-md focus:outline-none flex-shrink-0"
               aria-label="Open menu"
               aria-expanded={open}
               onClick={() => setOpen(true)}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[20px] xs:h-[20px] sm:w-[22px] sm:h-[22px] md:w-[30px] md:h-[30px]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="xs:w-[24px] xs:h-[24px] sm:w-[26px] sm:h-[26px] md:w-[28px] md:h-[28px]">
                 <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>

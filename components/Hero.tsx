@@ -63,15 +63,8 @@ export default function Hero() {
               <strong 
                 className="text-gray-900" 
                 style={{ 
-                  backgroundColor: 'transparent',
                   fontWeight: 900,
-                  WebkitFontSmoothing: 'antialiased',
-                  padding: '0',
-                  borderRadius: '0',
-                  boxDecorationBreak: 'none',
-                  WebkitBoxDecorationBreak: 'none',
-                  marginBottom: '0',
-                  display: 'inline-block'
+                  WebkitFontSmoothing: 'antialiased'
                 }}
               >
                 Mobile Ultrasound Service

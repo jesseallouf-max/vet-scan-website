@@ -49,7 +49,77 @@ html { scroll-behavior: smooth; }
 :focus { outline: none; }
 :focus-visible { outline: 2px solid #146C60; outline-offset: 2px; }
 
-/* Hero CTA â€" FIXED VERSION - removed conflicting styles */
+/* FIXED Professional Hero CTA Button - Consistent Scaling */
+.btn-hero-professional {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #146C60;
+  color: #fff;
+  border-radius: 0.5rem;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  /* Mobile: compact but readable */
+  padding: 0.875rem 1.5rem;
+  font-size: 0.875rem;
+  min-width: auto;
+}
+
+.btn-hero-professional:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-hero-professional:active {
+  transform: translateY(0);
+}
+
+/* Small mobile (375px+) */
+@media (min-width: 375px) {
+  .btn-hero-professional {
+    padding: 1rem 2rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Tablet (640px+) - More generous but not excessive */
+@media (min-width: 640px) {
+  .btn-hero-professional {
+    padding: 1.125rem 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Large tablet/small desktop (768px+) */
+@media (min-width: 768px) {
+  .btn-hero-professional {
+    padding: 1.25rem 3rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Desktop (1024px+) - Professional size, not massive */
+@media (min-width: 1024px) {
+  .btn-hero-professional {
+    padding: 1.375rem 4rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* Large desktop (1280px+) */
+@media (min-width: 1280px) {
+  .btn-hero-professional {
+    padding: 1.5rem 5rem;
+    font-size: 1.375rem;
+  }
+}
+
+/* Legacy button styles - keeping for other components */
 .btn-hero {
   @apply inline-flex items-center justify-center w-full sm:w-auto 
          h-14 md:h-16 px-8 md:px-10 rounded-xl font-bold text-lg tracking-wide
@@ -65,7 +135,7 @@ html { scroll-behavior: smooth; }
   transform: scale(0.95);
 }
 
-/* Single Responsive Hero Button */
+/* Legacy responsive button - keeping for backward compatibility */
 .btn-hero-responsive {
   display: inline-flex;
   align-items: center;

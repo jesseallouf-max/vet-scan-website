@@ -58,19 +58,19 @@ export default function Hero() {
           >
             <h1
               id="hero-heading"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-left mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-center md:text-left mb-4"
             >
               <strong 
-                className="text-teal-700" 
+                className="text-gray-900" 
                 style={{ 
-                  backgroundColor: 'rgba(244,238,226, 0.4)',
+                  backgroundColor: 'transparent',
                   fontWeight: 900,
                   WebkitFontSmoothing: 'antialiased',
-                  padding: '4px 8px 6px 8px',
-                  borderRadius: '6px',
-                  boxDecorationBreak: 'clone',
-                  WebkitBoxDecorationBreak: 'clone',
-                  marginBottom: '2px',
+                  padding: '0',
+                  borderRadius: '0',
+                  boxDecorationBreak: 'none',
+                  WebkitBoxDecorationBreak: 'none',
+                  marginBottom: '0',
                   display: 'inline-block'
                 }}
               >
@@ -79,7 +79,7 @@ export default function Hero() {
             </h1>
            
             {/* Primary CTA - Using correct class and full width */}
-            <div className="mt-6 md:mt-8 flex justify-center md:justify-start" style={{ marginLeft: '8px' }}>
+            <div className="mt-6 md:mt-8 flex justify-center md:justify-start" style={{ marginLeft: '0px' }}>
               <a
                 href="#contact"
                 aria-label="Request a scan"

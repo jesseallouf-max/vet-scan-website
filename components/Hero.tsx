@@ -21,7 +21,7 @@ export default function Hero() {
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover object-center"
+                className="object-cover object-top"
               />
             </div>
           </motion.div>
@@ -42,7 +42,7 @@ export default function Hero() {
                 fill
                 priority
                 sizes="(min-width: 768px) 520px, 100vw"
-                className="object-cover object-center"
+                className="object-cover object-top"
               />
             </div>
           </motion.div>
@@ -58,7 +58,7 @@ export default function Hero() {
           >
             <h1
               id="hero-heading"
-              className="max-w-2xl text-4xl sm:text-5xl md:text-6xl leading-tight tracking-tight text-left mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-left mb-4"
             >
               <strong 
                 className="text-teal-700" 
@@ -66,11 +66,11 @@ export default function Hero() {
                   backgroundColor: 'rgba(244,238,226, 0.4)',
                   fontWeight: 900,
                   WebkitFontSmoothing: 'antialiased',
-                  padding: '8px 8px 12px 8px',
+                  padding: '4px 8px 6px 8px',
                   borderRadius: '6px',
                   boxDecorationBreak: 'clone',
                   WebkitBoxDecorationBreak: 'clone',
-                  marginBottom: '4px',
+                  marginBottom: '2px',
                   display: 'inline-block'
                 }}
               >
@@ -83,7 +83,7 @@ export default function Hero() {
             </h1>
            
             {/* Primary CTA - Using correct class and full width */}
-            <div className="mt-8 md:mt-10 flex justify-center md:justify-start" style={{ marginLeft: '8px' }}>
+            <div className="mt-6 md:mt-8 flex justify-center md:justify-start" style={{ marginLeft: '8px' }}>
               <a
                 href="#contact"
                 aria-label="Request a scan"

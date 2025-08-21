@@ -74,12 +74,8 @@ export default function Hero() {
                   display: 'inline-block'
                 }}
               >
-                Ultrasound Services
+                Mobile Ultrasound Service
               </strong>
-              {' '}
-              <span className="text-gray-900" style={{ fontWeight: 400 }}>
-                for Veterinary Clinics
-              </span>
             </h1>
            
             {/* Primary CTA - Using correct class and full width */}

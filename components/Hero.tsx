@@ -58,7 +58,7 @@ export default function Hero() {
           >
             <h1
               id="hero-heading"
-              className="max-w-2xl text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight text-left mb-6"
+              className="max-w-2xl text-4xl sm:text-5xl md:text-6xl leading-tight tracking-tight text-left mb-6"
             >
               <strong 
                 className="text-teal-700" 
@@ -70,25 +70,25 @@ export default function Hero() {
                   borderRadius: '6px',
                   boxDecorationBreak: 'clone',
                   WebkitBoxDecorationBreak: 'clone',
-                  marginBottom: '16px',
+                  marginBottom: '4px',
                   display: 'inline-block'
                 }}
               >
                 Ultrasound Services
               </strong>
-              <br />
+              {' '}
               <span className="text-gray-900" style={{ fontWeight: 400 }}>
                 for Veterinary Clinics
               </span>
             </h1>
            
-            {/* Primary CTA - Fixed styling and text */}
-            <div className="flex justify-center md:justify-start" style={{ marginLeft: '8px' }}>
+            {/* Primary CTA - Using correct class and full width */}
+            <div className="mt-8 md:mt-10 flex justify-center md:justify-start" style={{ marginLeft: '8px' }}>
               <a
                 href="#contact"
                 aria-label="Request a scan"
                 data-event="hero_request_scan"
-                className="btn-hero-professional"
+                className="btn-hero-responsive"
               >
                 BOOK NOW
               </a>

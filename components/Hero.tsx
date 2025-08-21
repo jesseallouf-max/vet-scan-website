@@ -63,11 +63,12 @@ export default function Hero() {
               <strong 
                 className="text-gray-900" 
                 style={{ 
+                  color: '#2C3E50',
                   fontWeight: 900,
                   WebkitFontSmoothing: 'antialiased'
                 }}
               >
-                Mobile Ultrasound Service
+                Veterinary Mobile Ultrasound Service
               </strong>
             </h1>
            

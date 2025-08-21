@@ -7,13 +7,13 @@ export default function Hero() {
       <div className="md:grid md:grid-cols-2 md:items-center md:gap-10">
         
         {/* Mobile Image - now visible on mobile, placed first */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.22, delay: 0.05 }}
-          className="md:hidden mb-8"
-        >
+        <div className="md:hidden mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.22, delay: 0.05 }}
+          >
           <div className="relative w-full h-[280px] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 bg-white">
             <Image
               src="/images/headshot.jpg"
@@ -24,16 +24,19 @@ export default function Hero() {
               className="object-cover object-center"
             />
           </div>
-        </motion.div>
+                          </motion.div>
+        </div>
+        </div>
+        </div>
 
         {/* Desktop Image - hidden on mobile, shown on desktop */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.22, delay: 0.05 }}
-          className="hidden md:block order-1"
-        >
+        <div className="hidden md:block order-1">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.22, delay: 0.05 }}
+          >
           <div className="relative w-full h-[420px] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 bg-white">
             <Image
               src="/images/headshot.jpg"
@@ -47,13 +50,13 @@ export default function Hero() {
         </motion.div>
 
         {/* Copy column - now with professional, straightforward copy */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.2 }}
-          className="order-2"
-        >
+        <div className="order-2">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.2 }}
+          >
           <h1
             id="hero-heading"
             className="max-w-2xl text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight text-left"

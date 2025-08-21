@@ -58,7 +58,7 @@ export default function Hero() {
           >
             <h1
               id="hero-heading"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight tracking-tight text-center md:text-left mb-4"
+              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight tracking-tight text-center md:text-left mb-4"
             >
               <strong 
                 className="text-gray-900" 

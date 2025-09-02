@@ -5,25 +5,22 @@ export default function ContactForm(){
   const [status,setStatus]=useState<'idle'|'loading'|'ok'|'error'>('idle')
   const [message,setMessage]=useState('')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [selectedService, setSelectedService] = useState('Abdominal Ultrasound')
+  const [selectedService, setSelectedService] = useState('Comprehensive Abdominal Ultrasound')
   const [allowTexting, setAllowTexting] = useState(false)
-  const [isEmergency, setIsEmergency] = useState(false)
-  const [hasInteracted, setHasInteracted] = useState(false)
+
 
   const services = [
-    'Abdominal Ultrasound',
-    'Second Opinions / Teleconsult'
+    'Comprehensive Abdominal Ultrasound',
+    'Ultrasound-Guided Procedures'
   ]
 
-  // Only scroll to contact section after user interactions, not on initial load
+  // Scroll to top of contact section when switching between states
   useEffect(() => {
-    if (hasInteracted && (status === 'ok' || status === 'idle')) {
-      const contactSection = document.getElementById('contact')
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  }, [status, hasInteracted])
+  }, [status])
 
   // Auto-resize textarea
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,11 +43,10 @@ export default function ContactForm(){
   }
 
   async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
-    e.preventDefault(); setStatus('loading'); setMessage(''); setHasInteracted(true)
+    e.preventDefault(); setStatus('loading'); setMessage('')
     const form=e.currentTarget; const data=Object.fromEntries(new FormData(form) as any)
     data.service = selectedService
     data.allowTexting = allowTexting
-    data.isEmergency = isEmergency
     try{
       const res=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       const json=await res.json(); if(!res.ok) throw new Error(json.error||'Request failed')
@@ -66,13 +62,12 @@ export default function ContactForm(){
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="text-center"
           >
-            <div className="text-center">
             <div className="mx-auto mb-6 w-16 h-16 rounded-full flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(135deg, #146C60, #0f5a50)' }}>
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
-              </div>
             </div>
             
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Request Received!</h2>
@@ -107,17 +102,9 @@ export default function ContactForm(){
               </div>
             )}
 
-            {isEmergency && (
-              <div className="mb-6 p-4 bg-orange-50 rounded-lg border border-orange-200">
-                <p className="text-sm text-orange-800">
-                  <strong>🚨 Emergency request noted</strong> - Dr. Khan will prioritize your request and respond ASAP.
-                </p>
-              </div>
-            )}
-
             <div className="flex justify-center">
               <button
-                onClick={() => {setStatus('idle'); setHasInteracted(true)}}
+                onClick={() => setStatus('idle')}
                 className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
               >
                 Submit Another Request
@@ -133,7 +120,7 @@ export default function ContactForm(){
     <section id="contact" className="section">
       {/* Title outside the card */}
       <div className="mb-8">
-        <h2 className="text-3xl md:text-4xl font-semibold">Request a Quote</h2>
+        <h2 className="text-3xl md:text-4xl font-semibold">Request Services</h2>
         <span className="inline-block mt-2 px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">For veterinary clinics</span>
       </div>
       
@@ -209,8 +196,8 @@ export default function ContactForm(){
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  >
-                 <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg">
+                  className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg"
+                >
                   {services.map((service) => (
                     <button
                       key={service}
@@ -224,7 +211,6 @@ export default function ContactForm(){
                       {service}
                     </button>
                   ))}
-                   </div>
                 </motion.div>
               )}
             </div>
@@ -264,32 +250,6 @@ export default function ContactForm(){
                 </div>
               </div>
               <span className="text-sm">OK to text me for quicker coordination</span>
-            </label>
-          </div>
-
-          <div className="flex items-center gap-3 md:col-span-2">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <div className="relative">
-                <input 
-                  id="isEmergency" 
-                  type="checkbox"
-                  checked={isEmergency}
-                  onChange={(e) => setIsEmergency(e.target.checked)}
-                  className="sr-only"
-                />
-                <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
-                  isEmergency 
-                    ? 'bg-orange-600 border-orange-600' 
-                    : 'bg-white border-gray-300 hover:border-gray-400'
-                }`}>
-                  {isEmergency && (
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  )}
-                </div>
-              </div>
-              <span className="text-sm">🚨 This is an emergency situation requiring urgent attention</span>
             </label>
           </div>
           

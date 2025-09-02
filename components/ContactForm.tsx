@@ -8,17 +8,18 @@ export default function ContactForm(){
   const [selectedService, setSelectedService] = useState('Comprehensive Abdominal Ultrasound')
   const [allowTexting, setAllowTexting] = useState(false)
 
-
   const services = [
     'Comprehensive Abdominal Ultrasound',
     'Ultrasound-Guided Procedures'
   ]
 
-  // Scroll to top of contact section when switching between states
+  // Scroll to top of contact section when switching between states (but not on initial load)
   useEffect(() => {
-    const contactSection = document.getElementById('contact')
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (status === 'ok' || status === 'error') {
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }, [status])
 
@@ -27,6 +28,7 @@ export default function ContactForm(){
     e.target.style.height = 'auto'
     e.target.style.height = e.target.scrollHeight + 'px'
   }
+  
   const formatPhoneNumber = (value: string) => {
     const phoneNumber = value.replace(/[^\d]/g, '')
     const phoneNumberLength = phoneNumber.length
@@ -199,19 +201,19 @@ export default function ContactForm(){
                   exit={{ opacity: 0, y: -10 }}
                 >
                   <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg">
-                  {services.map((service) => (
-                    <button
-                      key={service}
-                      type="button"
-                      onClick={() => {
-                        setSelectedService(service)
-                        setIsDropdownOpen(false)
-                      }}
-                      className="w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-xl last:rounded-b-xl transition-colors duration-150"
-                    >
-                      {service}
-                    </button>
-                  ))}
+                    {services.map((service) => (
+                      <button
+                        key={service}
+                        type="button"
+                        onClick={() => {
+                          setSelectedService(service)
+                          setIsDropdownOpen(false)
+                        }}
+                        className="w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-xl last:rounded-b-xl transition-colors duration-150"
+                      >
+                        {service}
+                      </button>
+                    ))}
                   </div>
                 </motion.div>
               )}

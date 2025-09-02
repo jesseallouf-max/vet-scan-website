@@ -39,31 +39,31 @@ function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:(
 
 export default function FAQ(){
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-
+  
   const faqItems = [
     {
       q: "Do you bring your own ultrasound equipment?", 
-      a: "VetScan NYC brings professional equipment but can use your in-house ultrasound system if preferred."
+      a: "Professional equipment is provided, with the flexibility to use your existing ultrasound system when convenient."
     },
     {
       q: "How quickly can you schedule a visit?", 
-      a: "VetScan NYC typically responds within 24-48 hours and works around your clinic's schedule. For urgent cases, same-day appointments may be available."
+      a: "Inquiries are responded to within 24-48 hours. Non emergency scans only."
     },
     {
       q: "What areas of Manhattan do you cover?", 
-      a: "VetScan NYC serves all of Manhattan south of 125th Street. For clinics outside this area, special arrangements can be discussed."
+      a: "All of Manhattan south of 125th Street. For clinics outside this area, happy to discuss special arrangements."
     },
     {
       q: "How long does a typical scan take?", 
-      a: "Most scans take 20-30 minutes, depending on the case complexity and patient cooperation."
+      a: "Most abdominal scans take 20-30 minutes, depending on the case complexity and patient cooperation."
     },
     {
       q: "When will I receive the report?", 
-      a: "Complete findings are discussed immediately at the end of each scan. A detailed PDF report with treatment recommendations and further diagnostic plans is delivered before leaving your clinic."
+      a: "Final results and comprehensive PDF reports with treatment and diagnostic recommendations are delivered immediately after each scan."
     },
     {
       q: "What if my patient is anxious or aggressive?", 
-      a: "VetScan NYC is experienced with anxious pets and works closely with your team to ensure patient comfort. Light sedation may be recommended for particularly stressed animals."
+      a: "Experienced handling of anxious pets with close collaboration with your team to ensure patient comfort. Light sedation may be recommended for particularly stressed animals."
     }
   ]
 

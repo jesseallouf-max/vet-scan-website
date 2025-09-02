@@ -24,14 +24,15 @@ function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:(
           </motion.svg>
         </div>
       </button>
-      <motion.div
-        initial={false}
-        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
-        className="overflow-hidden"
-      >
-        <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
-      </motion.div>
+      <div className="overflow-hidden">
+        <motion.div
+          initial={false}
+          animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
+        </motion.div>
+      </div>
     </div>
   )
 }

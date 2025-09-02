@@ -36,44 +36,37 @@ export default function About(){
         About Dr. Amelia Khan
       </h2>
 
-      {/* Desktop: Balanced layout - credentials slightly smaller, photos slightly larger */}
-      <div className="mt-6 grid gap-8 lg:grid-cols-5 lg:items-start">
-        {/* Left: narrative + credential cards (2 columns on desktop) */}
-        <div className="lg:col-span-2">
+      {/* Desktop: Balanced layout - credentials compact, photos proportionally larger */}
+      <div className="mt-6 grid gap-8 lg:grid-cols-3 lg:items-start">
+        {/* Left: narrative + credential cards (1 column on desktop) */}
+        <div className="lg:col-span-1">
           <p className="text-gray-700 text-lg">
-            New York–based veterinarian providing mobile ultrasound services to small‑animal practices across Manhattan.
+            Dr. Amelia Khan brings 15 years of small animal veterinary experience and 9 years of specialized ultrasound expertise directly to your practice. Certified by Sound® Academy of Veterinary Imaging, she provides comprehensive mobile diagnostic services to veterinary clinics across Manhattan.
           </p>
 
           {/* Logo-forward credential cards; 1-col mobile, 2-col sm, 1-col desktop for vertical stacking */}
           <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 lg:gap-12" aria-label="Credentials">
             {creds.map((c) => (
               <li key={c.heading}>
-                {/* Logo card only */}
+                {/* Logo card only - removed all text below */}
                 <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
                   <div className="relative mx-auto h-16 md:h-24 w-full">
                     {c.logo ? (
                       <Image src={c.logo} alt={c.alt} fill sizes="(min-width: 1024px) 16rem, (min-width: 768px) 12rem, 100vw" className="object-contain" />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center rounded-md bg-neutral-100 text-base font-semibold text-neutral-700">
-                        {"Logo"}
+                        {c.fallback ?? "Logo"}
                       </div>
                     )}
                   </div>
-                </div>
-                {/* Divider between logo card and caption */}
-                <div className="mx-auto mt-3 h-px w-8 bg-neutral-200" />
-                {/* Bolded text BELOW the card */}
-                <div className="mt-2 text-center">
-                  <div className="text-base md:text-lg font-semibold text-neutral-900">{c.heading}</div>
-                  <div className="text-sm md:text-base font-medium text-neutral-700">{c.sub}</div>
                 </div>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Right: headshot card (3 columns on desktop) */}
-        <div className="lg:col-span-3">
+        {/* Right: headshot card (2 columns on desktop) */}
+        <div className="lg:col-span-2">
           {/* Mobile: horizontal swipe gallery */}
           <div className="lg:hidden -mx-4 px-4" aria-label="Headshot gallery">
             <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 pr-6 -mr-4">

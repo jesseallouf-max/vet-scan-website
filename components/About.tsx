@@ -89,24 +89,24 @@ export default function About(){
             </div>
           </div>
 
-          {/* Desktop: stacked images, smaller and moved right */}
-          <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:pl-8">
-            <div className="relative aspect-[4/3] w-4/5 ml-auto overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
+          {/* Desktop: stacked images, better sized and positioned */}
+          <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:pl-4">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
               <Image
                 src={headshots[0].src}
                 alt={headshots[0].alt}
                 fill
-                sizes="(min-width: 1024px) 18rem, (min-width: 768px) 16rem, 100vw"
+                sizes="(min-width: 1024px) 22rem, (min-width: 768px) 18rem, 100vw"
                 className="object-cover object-center"
                 priority
               />
             </div>
-            <div className="relative aspect-[4/3] w-4/5 ml-auto overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
               <Image
                 src={headshots[1].src}
                 alt={headshots[1].alt}
                 fill
-                sizes="(min-width: 1024px) 18rem, (min-width: 768px) 16rem, 100vw"
+                sizes="(min-width: 1024px) 22rem, (min-width: 768px) 18rem, 100vw"
                 className="object-cover object-center"
               />
             </div>

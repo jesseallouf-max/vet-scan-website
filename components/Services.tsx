@@ -10,22 +10,6 @@ const IconAbdominalScan = () => (
   </svg>
 )
 
-// Emergency FAST Scan Icon
-const IconFastScan = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-    <circle cx="18" cy="6" r="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-  </svg>
-)
-
-// Cardiac & Thoracic Icon
-const IconCardiacScan = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-    <path d="M9 11h2m2 0h2M12 9v4" stroke="currentColor" strokeWidth="1.2"/>
-  </svg>
-)
-
 // Ultrasound-Guided Procedures Icon  
 const IconGuidedProcedures = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none">

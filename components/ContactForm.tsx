@@ -65,50 +65,51 @@ export default function ContactForm(){
           >
             <div className="text-center">
               <div className="mx-auto mb-6 w-16 h-16 rounded-full flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(135deg, #146C60, #0f5a50)' }}>
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-            </div>
-            
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Request Received!</h2>
-            <p className="text-lg text-gray-600 mb-8">Thank you for reaching out. Here's what happens next:</p>
-            
-            <div className="space-y-4 mb-8 text-left max-w-md mx-auto">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm" style={{ backgroundColor: '#F4EEE2', boxShadow: '0 1px 3px rgba(20, 108, 96, 0.2)' }}>
-                  <span className="text-sm font-semibold" style={{ color: '#146C60' }}>1</span>
-                </div>
-                <p className="text-gray-700"><strong>Within 24-48 hours:</strong> Dr. Khan will review your request and respond with availability and pricing.</p>
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm" style={{ backgroundColor: '#F4EEE2', boxShadow: '0 1px 3px rgba(20, 108, 96, 0.2)' }}>
-                  <span className="text-sm font-semibold" style={{ color: '#146C60' }}>2</span>
+              
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Request Received!</h2>
+              <p className="text-lg text-gray-600 mb-8">Thank you for reaching out. Here's what happens next:</p>
+              
+              <div className="space-y-4 mb-8 text-left max-w-md mx-auto">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm" style={{ backgroundColor: '#F4EEE2', boxShadow: '0 1px 3px rgba(20, 108, 96, 0.2)' }}>
+                    <span className="text-sm font-semibold" style={{ color: '#146C60' }}>1</span>
+                  </div>
+                  <p className="text-gray-700"><strong>Within 24-48 hours:</strong> Dr. Khan will review your request and respond with availability and pricing.</p>
                 </div>
-                <p className="text-gray-700"><strong>Schedule:</strong> We'll coordinate a convenient time that works with your clinic's schedule.</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm" style={{ backgroundColor: '#F4EEE2', boxShadow: '0 1px 3px rgba(20, 108, 96, 0.2)' }}>
-                  <span className="text-sm font-semibold" style={{ color: '#146C60' }}>3</span>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm" style={{ backgroundColor: '#F4EEE2', boxShadow: '0 1px 3px rgba(20, 108, 96, 0.2)' }}>
+                    <span className="text-sm font-semibold" style={{ color: '#146C60' }}>2</span>
+                  </div>
+                  <p className="text-gray-700"><strong>Schedule:</strong> We'll coordinate a convenient time that works with your clinic's schedule.</p>
                 </div>
-                <p className="text-gray-700"><strong>Service & Report:</strong> Professional scan performed at your location with same-day reporting.</p>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm" style={{ backgroundColor: '#F4EEE2', boxShadow: '0 1px 3px rgba(20, 108, 96, 0.2)' }}>
+                    <span className="text-sm font-semibold" style={{ color: '#146C60' }}>3</span>
+                  </div>
+                  <p className="text-gray-700"><strong>Service & Report:</strong> Professional scan performed at your location with same-day reporting.</p>
+                </div>
               </div>
-            </div>
 
-            {allowTexting && (
-              <div className="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                <p className="text-sm text-slate-700">
-                  <strong>✓ Texting enabled</strong> - Dr. Khan may reach out via text for quicker coordination.
-                </p>
-              </div>
-            )}
+              {allowTexting && (
+                <div className="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                  <p className="text-sm text-slate-700">
+                    <strong>✓ Texting enabled</strong> - Dr. Khan may reach out via text for quicker coordination.
+                  </p>
+                </div>
+              )}
 
-            <div className="flex justify-center">
-              <button
-                onClick={() => setStatus('idle')}
-                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
-              >
-                Submit Another Request
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setStatus('idle')}
+                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
+                >
+                  Submit Another Request
+                </button>
+              </div>
             </div>
           </motion.div>
         </div>

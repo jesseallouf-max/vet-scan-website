@@ -36,10 +36,10 @@ export default function About(){
         About Dr. Amelia Khan
       </h2>
 
-      {/* Desktop: Balanced layout - credentials compact, photos proportionally larger */}
-      <div className="mt-6 grid gap-8 lg:grid-cols-3 lg:items-start">
-        {/* Left: narrative + credential cards (1 column on desktop) */}
-        <div className="lg:col-span-1">
+      {/* Desktop: Better balance - content has breathing room, images closer */}
+      <div className="mt-6 grid gap-8 lg:grid-cols-5 lg:items-start">
+        {/* Left: narrative + credential cards (3 columns on desktop) */}
+        <div className="lg:col-span-3">
           <p className="text-gray-700 text-lg">
             Dr. Amelia Khan brings 15 years of small animal veterinary experience and 9 years of specialized ultrasound expertise directly to your practice. Certified by Sound® Academy of Veterinary Imaging, she provides comprehensive mobile diagnostic services to veterinary clinics across Manhattan.
           </p>

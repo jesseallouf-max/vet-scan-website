@@ -50,33 +50,7 @@ export default function Services() {
               <div className="text-brand-primary"><IconAbdominalScan/></div>
               <div>
                 <h3 className="text-xl font-semibold">Comprehensive Abdominal Ultrasound</h3>
-                <p className="mt-2 text-gray-700">Complete evaluation of liver, gallbladder, pancreas, kidneys, spleen, bladder, and GI tract. Ideal for chronic disease workups, mass detection, and staging. Performed using your in-hospital equipment.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Emergency FAST Scanning */}
-        <motion.div whileHover={{y:-2}}>
-          <div className="card p-6 h-full">
-            <div className="flex items-start gap-4">
-              <div className="text-brand-primary"><IconFastScan/></div>
-              <div>
-                <h3 className="text-xl font-semibold">Emergency FAST Scanning</h3>
-                <p className="mt-2 text-gray-700">Rapid trauma assessment using AFAST and TFAST protocols. Quick detection of free fluid in abdomen, pleural space, and pericardium for immediate triage and emergency decision-making.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Cardiac & Thoracic Ultrasound */}
-        <motion.div whileHover={{y:-2}}>
-          <div className="card p-6 h-full">
-            <div className="flex items-start gap-4">
-              <div className="text-brand-primary"><IconCardiacScan/></div>
-              <div>
-                <h3 className="text-xl font-semibold">Cardiac & Thoracic Ultrasound</h3>
-                <p className="mt-2 text-gray-700">Echocardiography for heart function assessment, valve evaluation, and congenital abnormalities. Thoracic scanning for pleural effusion, pneumothorax detection, and lung pathology using Vet BLUE protocols.</p>
+                <p className="mt-2 text-gray-700">Complete evaluation of liver, gallbladder, pancreas, kidneys, spleen, bladder, and GI tract. Ideal for chronic disease workups, mass detection, and staging.</p>
               </div>
             </div>
           </div>
@@ -89,7 +63,7 @@ export default function Services() {
               <div className="text-brand-primary"><IconGuidedProcedures/></div>
               <div>
                 <h3 className="text-xl font-semibold">Ultrasound-Guided Procedures</h3>
-                <p className="mt-2 text-gray-700">Fine-needle aspirations, tissue core biopsies, cystocentesis, and therapeutic drainage procedures. Minimally invasive sampling with real-time ultrasound guidance for accurate diagnosis.</p>
+                <p className="mt-2 text-gray-700">Fine-needle aspirations, cystocentesis, and therapeutic drainage procedures. Minimally invasive sampling with real-time ultrasound guidance for accurate diagnosis.</p>
               </div>
             </div>
           </div>

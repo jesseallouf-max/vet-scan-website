@@ -32,7 +32,7 @@ export default function Home(){
         <Services />
         <About />
         <Coverage />
-        <Testimonials />
+         {/* commented out - Testimonials */}
         <FAQ />
         <ContactForm />
       </main>

@@ -1,49 +1,33 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 function Item({q,a,isOpen,onToggle}:{q:string,a:string,isOpen:boolean,onToggle:()=>void}){
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [height, setHeight] = useState(0)
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setHeight(isOpen ? contentRef.current.scrollHeight : 0)
-    }
-  }, [isOpen])
-
   return (
     <div className="border-b border-gray-200 last:border-b-0">
-      <button
+      <button 
         onClick={onToggle} 
         className={`w-full text-left py-4 font-semibold text-lg transition-colors duration-200 flex items-center justify-between group focus:outline-none ${
           isOpen ? 'text-teal-700' : 'text-gray-900 md:hover:text-teal-700'
         }`}
       >
-        <span className="pr-4">{q}</span>
+        <span>{q}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
+          className="text-teal-600 group-hover:text-teal-700"
         >
-          <div className="text-teal-600 group-hover:text-teal-700 flex-shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </motion.div>
       </button>
-      
       <motion.div
         initial={false}
-        animate={{ 
-          height: height,
-          opacity: isOpen ? 1 : 0 
-        }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-        style={{ overflow: "hidden" }}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+        className="overflow-hidden"
       >
-        <div ref={contentRef}>
-          <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
-        </div>
+        <p className="pb-4 text-gray-700 leading-relaxed">{a}</p>
       </motion.div>
     </div>
   )
@@ -55,7 +39,7 @@ export default function FAQ(){
   const faqItems = [
     {
       q: "Do you bring your own ultrasound equipment?", 
-      a: "No, I use your hospital's existing ultrasound equipment. This keeps costs down and ensures I'm working with the system your team knows best."
+      a: "Professional equipment is provided, with the flexibility to use your existing ultrasound system when convenient."
     },
     {
       q: "How quickly can you schedule a visit?", 
@@ -66,16 +50,12 @@ export default function FAQ(){
       a: "I serve all of Manhattan south of 125th Street. For clinics outside this area, I'm happy to discuss special arrangements."
     },
     {
-      q: "Do you scan both cats and dogs?", 
-      a: "Yes, I provide abdominal ultrasound services for both cats and dogs of all sizes."
-    },
-    {
       q: "How long does a typical scan take?", 
-      a: "Most abdominal scans take 30-45 minutes, depending on the case complexity and patient cooperation."
+      a: "Most abdominal scans take 20-30 minutes, depending on the case complexity and patient cooperation."
     },
     {
       q: "When will I receive the report?", 
-      a: "Reports are typically delivered within 24 hours, often the same day. For urgent cases, preliminary findings can be discussed immediately after the scan."
+      a: "Final results and comprehensive PDF reports with treatment and diagnostic recommendations are delivered immediately after each scan, before proceeding to the next case."
     },
     {
       q: "What if my patient is anxious or aggressive?", 

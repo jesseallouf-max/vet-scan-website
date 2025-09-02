@@ -53,10 +53,10 @@ export default function Footer(){
 
               {/* Column 2 - Services */}
               <div className="px-4 mb-8 md:mb-0">
-                <h4 className="text-lg font-bold text-gray-900 mb-4">Our Services</h4>
+                <h4 className="text-lg font-bold text-gray-900 mb-4">VetScan NYC Services</h4>
                 <ul className="space-y-2 text-gray-600 text-sm">
                   <li><a href="#services" className="hover:text-teal-600 transition-colors">Abdominal Ultrasound</a></li>
-                  <li><a href="#services" className="hover:text-teal-600 transition-colors">Second Opinions</a></li>
+                  <li><a href="#services" className="hover:text-teal-600 transition-colors">Ultrasound-Guided Procedures</a></li>
                 </ul>
               </div>
 
@@ -66,8 +66,8 @@ export default function Footer(){
                 <ul className="space-y-2 text-gray-600 text-sm">
                   <li><a href="#about" className="hover:text-teal-600 transition-colors">About Dr. Khan</a></li>
                   <li><a href="#coverage" className="hover:text-teal-600 transition-colors">Coverage Map</a></li>
-                  <li><a href="#contact" className="hover:text-teal-600 transition-colors">Request Quote</a></li>
-                  <li><a href="#services" className="hover:text-teal-600 transition-colors">Emergency Services</a></li>
+                  <li><a href="#contact" className="hover:text-teal-600 transition-colors">Request Services</a></li>
+                  <li><a href="#services" className="hover:text-teal-600 transition-colors">Services</a></li>
                 </ul>
               </div>
 

@@ -17,7 +17,7 @@ export default function Hero() {
             <div className="relative w-full h-[280px] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 bg-white">
               <Image
                 src="/images/headshot-1.png"
-                alt="Dr. Amelia Khan with a canine patient in a Manhattan clinic exam room."
+                alt="Dr. Amelia Khan with a doodle."
                 fill
                 priority
                 sizes="100vw"
@@ -37,8 +37,8 @@ export default function Hero() {
           >
             <div className="relative w-full h-[420px] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 bg-white">
               <Image
-                src="/images/headshot.jpg"
-                alt="Dr. Amelia Khan with a canine patient in a Manhattan clinic exam room."
+                src="/images/headshot-1.png"
+                alt="Dr. Amelia Khan with a doodle."
                 fill
                 priority
                 sizes="(min-width: 768px) 520px, 100vw"

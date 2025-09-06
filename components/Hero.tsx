@@ -16,7 +16,7 @@ export default function Hero() {
           >
             <div className="relative w-full h-[280px] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 bg-white">
               <Image
-                src="/images/headshot.jpg"
+                src="/images/headshot-1.png"
                 alt="Dr. Amelia Khan with a canine patient in a Manhattan clinic exam room."
                 fill
                 priority

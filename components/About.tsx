@@ -25,7 +25,7 @@ export default function About(){
 
   // Headshot gallery (provide your own images later)
   const headshots = [
-    { src: "/images/headshot-2.png", alt: "Dr. Amelia Khan with doodle" },
+    { src: "/images/headshot-1.png", alt: "Dr. Amelia Khan with doodle" },
     { src: "/images/headshot-3.png", alt: "Dr. Amelia Khan at clinic" },
     { src: "/images/headshot-4.png", alt: "Dr. Amelia Khan with small dog" }
   ];

@@ -25,8 +25,9 @@ export default function About(){
 
   // Headshot gallery (provide your own images later)
   const headshots = [
-    { src: "/images/headshot.jpg", alt: "Dr. Amelia Khan" },
-    { src: "/images/headshot-2.jpg", alt: "Dr. Amelia Khan at clinic" },
+    { src: "/images/headshot-2.png", alt: "Dr. Amelia Khan with doodle" },
+    { src: "/images/headshot-3.png", alt: "Dr. Amelia Khan at clinic" },
+    { src: "/images/headshot-4.png", alt: "Dr. Amelia Khan with small dog" }
   ];
 
   return (
@@ -93,8 +94,8 @@ export default function About(){
           <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:pl-4">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
               <Image
-                src={headshots[0].src}
-                alt={headshots[0].alt}
+                src={headshots[2].src}
+                alt={headshots[2].alt}
                 fill
                 sizes="(min-width: 1024px) 22rem, (min-width: 768px) 18rem, 100vw"
                 className="object-cover object-center"
@@ -103,8 +104,17 @@ export default function About(){
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
               <Image
-                src={headshots[1].src}
-                alt={headshots[1].alt}
+                src={headshots[3].src}
+                alt={headshots[3].alt}
+                fill
+                sizes="(min-width: 1024px) 22rem, (min-width: 768px) 18rem, 100vw"
+                className="object-cover object-center"
+              />
+            </div>
+             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-sm">
+              <Image
+                src={headshots[4].src}
+                alt={headshots[4].alt}
                 fill
                 sizes="(min-width: 1024px) 22rem, (min-width: 768px) 18rem, 100vw"
                 className="object-cover object-center"

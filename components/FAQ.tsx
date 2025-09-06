@@ -59,7 +59,7 @@ export default function FAQ(){
     },
     {
       q: "When will I receive the report?", 
-      a: "Final results and comprehensive PDF reports with treatment and diagnostic recommendations are delivered immediately after each scan."
+      a: "Preliminary findings are reported at the end of each scan. A detailed PDF report with treatment recommendations and further diagnostic plans is provided the same day."
     },
     {
       q: "What if my patient is anxious or aggressive?", 
